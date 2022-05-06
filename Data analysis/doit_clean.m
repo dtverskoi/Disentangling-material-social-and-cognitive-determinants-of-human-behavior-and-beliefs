@@ -1,11 +1,14 @@
-% Sept.23, 2021
-% The code estimates parameters of the utility function and beliefs dynamics with or w/out
-% authority messaging
-% Also: LH graphs and utility losses. The latter still needs to be fixed/checked
-% Sept.30: a cleaner version with all LH graphs
-% Sept.30: added gender
-% Oct.1: added lost utility components; also payoffs to LH graphs
-% Oct.2, 2021: clean version
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% doit_clean.m estimates parameters of the utility function and beliefs dynamics with or without
+% authority messaging. The functions Init.m and Collinearity.m are used to produce the above 
+% estimates. Note that the function Collinearity.m uses the results of the function vif.m.
+
+% The doit_clean.m code also includes: (1) estimates of the alternative models. To perform this
+% analysis, the function MLEM.m is required; (2) bootstrap confidence intervals of the parameter 
+% estimates; (3) analysis of gender differences; (4) effects of the differences in the model 
+% parameters between individuals; (5) analysis of utility losses; (6) distributions of parameters.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all
 close all
@@ -69,8 +72,6 @@ if ESTIMATION
             n=nan(N,1);         % number of observations for each individual
             L=nan(N,1);         % likelihoods
             CN=nan(N,4);        % number of problematic variables in the design matirx and the actual number of regressors
-            %             OutB=NaN(N,T,4);    % x-theta, y-theta, \tilde{y}-theta, \tilde{x}-theta
-            %             OutA=NaN(N,T,4);    % x, y, \tilde{y}, \tilde{x}
             
             %Data
             if authority
@@ -91,7 +92,6 @@ if ESTIMATION
                 
                 J1=find(Di(:,24)~=1);                                                   % not missed
                 theta=min(30,(14-5*nanmean(Di(:,4:8),2)/12)/(1/6));                        % forward -looking best response (given expectations)
-                %                 OutB(i,J1,:)=[Di(J1,2) Di(J1,3) mean(Di(J1,9:13),2) mean(Di(J1,4:8),2)]-theta(J1);
                 
                 J=find(Di(:,24)==1);                                                    % rounds with missing contibution x; all cases with missing data don't have x
                 Di(J,:)=[];
@@ -253,15 +253,6 @@ if ESTIMATION
             
             Final(authority+1, equation+1, 2:size(Par,2))= Estimate(1:p);
             Final(authority+1, equation+1, end-1:end)= [Estimate(end) BIC];
-            
-            % if ~Equation    % need to add it for beliefs
-            %     Xpr=Par(Used,1).*squeeze(OutB(Used,:,2)) + Par(Used,2).*squeeze(OutB(Used,:,3)) + Par(Used,3).*squeeze(OutB(Used,:,4)); %predicted values for Used individuals and Present time moments
-            %     if Authority
-            %         Xpr=Xpr+Par(Used,4).*squeeze(OutB(Used,5));
-            %     end
-            %     errors=squeeze(OutB(Used,:,1))-Xpr;
-            %     RMSE=sqrt(nansum(nansum(errors.*errors))/sum(n(Used)))
-            % end
             
             if ALTERNATIVES
                 [AEstimate,ABIC,BEstimate,BBIC] = Alter(equation,authority,N,p,D,Used,Runs,options,eps);
