@@ -1,9 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The functions Init.m produces initial conditions for the maximum likelihood 
+% procedure used in the doit_clean.m and MLEM.m files.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function z=Init(Runs,d)
 % d>=3 is the number of dimensions for the vector of initial conditions
 % d-1 components come from a broken stick distribution, d-th component fom
 % a uniform distribution
-
-% good practice: add an error mesaage if d is not a positive integer >2
 if d==1
     z=[5*rand(Runs,1)+1];
 else
