@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The function Collinearity.m performs multicollinearity detection. It uses the results of the
+% vif.m function.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function [z,Vif,sValue,condInd,VarDecomp]=Collinearity(M)
 % identifies problematic variables in design matrix M
 % uses threshold of 30 for condition number, 0.5 for varDecomp, and 10 for vif
