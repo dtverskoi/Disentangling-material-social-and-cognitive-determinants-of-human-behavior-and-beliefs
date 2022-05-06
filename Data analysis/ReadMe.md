@@ -4,7 +4,7 @@ The functions Init.m (which produces initial conditions for the maximum likeliho
 uses the results of the function vif.m which calculates variance inflation factor (VIF).
 
 The doit_clean.m code also includes:
-(1) estimates of the alternative models. To perform this analysis, the function MLEM.m is required;
+(1) estimates of the alternative models. To perform this analysis, the functions Alter.m and MLEM.m are required;
 (2) bootstrap confidence intervals of the parameter estimates;
 (3) analysis of gender differences;
 (4) effects of the differences in the model parameters between individuals;
