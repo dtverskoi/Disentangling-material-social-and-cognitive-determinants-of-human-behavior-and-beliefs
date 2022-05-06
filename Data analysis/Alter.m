@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  The function Alter.m estimates all the alternative models. To perform this analysis, the function MLEM.m
+% is required.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function [AEstimate,ABIC,BEstimate,BBIC] = Alter(equation,authority,N,p,D,Used,Runs,options,eps)
 if authority==0
     DD=squeeze(D(1,:,:));
